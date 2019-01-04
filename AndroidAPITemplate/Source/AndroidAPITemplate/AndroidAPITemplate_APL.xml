@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--GearVR plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- init section is always evaluated once per architecture -->
+    <trace enable="true"/>
+    <init>
+        <log text="AndroidAPITemplate init"/>		
+    </init>
+
+    <androidManifestUpdates>
+        <addElements tag="application">
+
+	    <activity android:name="com.isaratech.androidapi.AndroidAPITemplateActivity"
+          android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+          android:label="@string/app_name" />
+
+    </addElements>
+
+
+    </androidManifestUpdates>
+
+    <!-- optional additions to proguard -->
+    <proguardAdditions>
+        <insert><![CDATA[
+          -keepattributes Signature
+          -dontskipnonpubliclibraryclassmembers
+
+         -keepclassmembers class com.epicgames.ue4.GameActivity {
+                public <methods>;
+                public <fields>;
+         }
+        ]]></insert>
+    </proguardAdditions>
+
+    <resourceCopies>
+        <!-- Copy the generated resource file to be packaged -->
+    </resourceCopies>
+
+    <AARImports>
+    </AARImports>
+  
+    <!-- optional additions to the GameActivity imports in GameActivity.java -->
+	<gameActivityImportAdditions>
+	    <insert>
+            import java.util.HashSet;
+            import java.util.Arrays;
+            import android.text.TextUtils;
+            import android.graphics.BitmapFactory; 
+            import android.os.Handler; 
+            import android.widget.Toast;
+        </insert>
+    </gameActivityImportAdditions>
+
+
+    <!-- optional additions to the GameActivity class in GameActivity.java -->
+    <gameActivityClassAdditions>
+        <insert>
+        <![CDATA[
+        /**
+        * Simply shows a toast text
+        */
+    public void AndroidThunkJava_AndroidAPI_ShowToast(final String toast) {
+        _activity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                 Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_LONG).show();
+            }
+         });
+    }
+		]]>
+		</insert>
+	</gameActivityClassAdditions>
+	
+	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+	<gameActivityReadMetadataAdditions>
+	<insert>
+
+  </insert>
+	</gameActivityReadMetadataAdditions>
+	
+	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
+	<gameActivityOnCreateAdditions>
+		<insert>
+		<![CDATA[
+		]]>
+		</insert>
+	</gameActivityOnCreateAdditions>
+
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java -->
+	<gameActivityOnDestroyAdditions>
+		<insert>
+		
+		</insert>
+	</gameActivityOnDestroyAdditions>
+	
+	
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnStartAdditions>
+		<insert>
+		
+		</insert>
+	</gameActivityOnStartAdditions>
+
+	<!-- optional additions to GameActivity onStop in GameActivity.java -->
+	<gameActivityOnStopAdditions>
+		<insert>
+		
+		</insert>
+	</gameActivityOnStopAdditions>
+	
+
+	<!-- optional additions to GameActivity onPause in GameActivity.java	-->
+	<gameActivityOnPauseAdditions>
+    <insert>
+    <![CDATA[
+    ]]>
+    </insert>
+  </gameActivityOnPauseAdditions>
+
+
+  <!-- optional additions to GameActivity onResume in GameActivity.java	-->
+  <gameActivityOnResumeAdditions>
+    <insert>
+    </insert>
+  </gameActivityOnResumeAdditions>
+
+
+	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+	<gameActivityOnActivityResultAdditions>
+		<insert>
+		</insert>
+    </gameActivityOnActivityResultAdditions>
+	
+
+	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
+	<soLoadLibrary>
+		<!-- need this if plugin enabled and supported architecture, even if not packaged for GearVR -->
+	</soLoadLibrary>
+</root>
